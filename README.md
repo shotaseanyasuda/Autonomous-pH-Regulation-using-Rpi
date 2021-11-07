@@ -1,1 +1,1 @@
-# Autonomous-pH-Regulation-using-Rpi
+# Autonomous-pH-Regulation-using-Raspberry Pi
