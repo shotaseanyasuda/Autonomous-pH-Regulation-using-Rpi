@@ -76,30 +76,30 @@ class Page1(Page):
             global lowerLimit
             # Lettuce Settings
             if (plant == 'lettuce'):
-                upperLimit = 6.5
-                lowerLimit = 6.0
+                upperLimit = 6.50
+                lowerLimit = 6.00
                 upperLimitDisplay = Label (self, text="{:.1f}".format(upperLimit) + "  ", font=("Arial Bold",40),bg='NavajoWhite2') #creates abels for upper limits
                 upperLimitDisplay.place(x=520,y=125)
                 lowerLimitDisplay = Label (self, text="{:.1f}".format(lowerLimit), font=("Arial Bold",40),bg='NavajoWhite2')
                 lowerLimitDisplay.place(x=520,y=275)
             # Strawberry Settings
             if (plant == 'strawberry'):
-                upperLimit = 6.5
-                lowerLimit = 5.5
+                upperLimit = 6.50
+                lowerLimit = 5.50
                 upperLimitDisplay = Label (self, text="{:.1f}".format(upperLimit) + "  ", font=("Arial Bold",40),bg='NavajoWhite2') #creates abels for upper limits
                 upperLimitDisplay.place(x=520,y=125)
                 lowerLimitDisplay = Label (self, text="{:.1f}".format(lowerLimit), font=("Arial Bold",40),bg='NavajoWhite2')
                 lowerLimitDisplay.place(x=520,y=275)
             if (plant == 'basil'):
-                upperLimit = 6.2
-                lowerLimit = 5.8
+                upperLimit = 6.20
+                lowerLimit = 5.80
                 upperLimitDisplay = Label (self, text="{:.1f}".format(upperLimit) + "  ", font=("Arial Bold",40),bg='NavajoWhite2') #creates abels for upper limits
                 upperLimitDisplay.place(x=520,y=125)
                 lowerLimitDisplay = Label (self, text="{:.1f}".format(lowerLimit), font=("Arial Bold",40),bg='NavajoWhite2')
                 lowerLimitDisplay.place(x=520,y=275)
             if (plant == 'spinach'):
-                upperLimit = 6.5
-                lowerLimit = 5.5
+                upperLimit = 6.50
+                lowerLimit = 5.50
                 upperLimitDisplay = Label (self, text="{:.1f}".format(upperLimit) + "  ", font=("Arial Bold",40),bg='NavajoWhite2') #creates abels for upper limits
                 upperLimitDisplay.place(x=520,y=125)
                 lowerLimitDisplay = Label (self, text="{:.1f}".format(lowerLimit), font=("Arial Bold",40),bg='NavajoWhite2')
@@ -136,7 +136,7 @@ class Page1(Page):
         global upperLimit
         if(upperLimit < 13.9):
             upperLimit = upperLimit + 0.1
-            upperLimitDisplay = Label (self, text="{:.1f}".format(upperLimit) + "  ", font=("Arial Bold",40),bg='NavajoWhite2') #creates abels for upper limits
+            upperLimitDisplay = Label (self, text="{:.1f}".format(upperLimit), font=("Arial Bold",40),bg='NavajoWhite2') #creates abels for upper limits
             upperLimitDisplay.place(x=520,y=125)
             print("Upper Limit is now",upperLimit)
         else:
@@ -145,7 +145,7 @@ class Page1(Page):
         global upperLimit
         if(upperLimit > lowerLimit + 0.6):
             upperLimit = upperLimit - 0.1
-            upperLimitDisplay = Label (self, text="{:.1f}".format(upperLimit) + "  ", font=("Arial Bold",40),bg='NavajoWhite2')
+            upperLimitDisplay = Label (self, text="{:.1f}".format(upperLimit), font=("Arial Bold",40),bg='NavajoWhite2')
             upperLimitDisplay.place(x=520,y=125)
             print("Upper Limit is now",upperLimit)
         else:
@@ -244,9 +244,24 @@ class Page4(Page):
         
         precisionInstructions = Label(self, text = "Precision Dispensing",font=("Arial Bold",30),bg='NavajoWhite2' )
         precisionInstructions.place(x=80,y=270)
-        
+            # Dispenses 1ml of base solution
+        def dispense1mlBase():
+            # Creates object p1 of class Pump
+            p1 = Pump('/dev/ttyAMA1')
+            # D is for dispense, number is for volume in ml
+            p1.send_cmd("D,1")
+            print("dispensing 1ml base")
+            
+        # Dispenses 1ml of acid solution
+        def dispense1mlAcid():
+            # Creates object p2 of class Pump
+            p2 = Pump('/dev/ttyAMA0')
+            # D is for dispense, number is for volume in ml
+            p2.send_cmd("D,1")
+            print("dispensing 1ml acid")
+            
         # Dispenses 2ml of base solution
-        def dispenseBase():
+        def dispense2mlBase():
             # Creates object p1 of class Pump
             p1 = Pump('/dev/ttyAMA1')
             # D is for dispense, number is for volume in ml
@@ -254,7 +269,7 @@ class Page4(Page):
             print("dispensing 2ml base")
             
         # Dispenses 2ml of acid solution
-        def dispenseAcid():
+        def dispense2mlAcid():
             # Creates object p2 of class Pump
             p2 = Pump('/dev/ttyAMA0')
             # D is for dispense, number is for volume in ml
@@ -325,34 +340,42 @@ class Page4(Page):
                 
             
         # Dispense 2ml Acid Button
-        button5 = Button(self, text='Dispense 2ml Acid: ', command = dispenseAcid,bg='NavajoWhite2', font=("Arial Bold",20))
-        button5.place(x=80,y=330)
+        button5 = Button(self, text='Dispense 2ml Acid ', command = dispense2mlAcid,bg='NavajoWhite2', font=("Arial Bold",20))
+        button5.place(x=420,y=330)
 
         # Dispense 2ml Base Button
-        button6 = Button(self, text='Dispense 2ml Base:', command = dispenseBase,bg='NavajoWhite2', font=("Arial Bold",20))
-        button6.place(x=80,y=380)
+        button6 = Button(self, text='Dispense 2ml Base', command = dispense2mlBase,bg='NavajoWhite2', font=("Arial Bold",20))
+        button6.place(x=420,y=380)
+        
+        # Dispense 1ml Acid Button
+        button14 = Button(self, text='Dispense 1ml Acid ', command = dispense1mlAcid,bg='NavajoWhite2', font=("Arial Bold",20))
+        button14.place(x=80,y=330)
+        
+        # Dispense 1ml Base Button
+        button15 = Button(self, text='Dispense 1ml Base ', command = dispense1mlBase,bg='NavajoWhite2', font=("Arial Bold",20))
+        button15.place(x=80,y=380)
         
         # Continuously Dispense Acid while button is held
-        button7 = Button(self, text = "Continuous Dispense Acid ",font=("Arial Bold",20))
+        button7 = Button(self, text = "Hold: Dispense Acid ",bg='NavajoWhite2',font=("Arial Bold",20))
         button7.place(x=80,y=135)
         button7.bind('<ButtonPress-1>',startAcid)
         button7.bind('<ButtonRelease-1>',stopDispense)
         
         # Continuously Dispense Base while button is held
-        button8 = Button(self, text = "Continuous Dispense Base",font=("Arial Bold",20))
-        button8.place(x=80,y=185)
+        button8 = Button(self, text = "Hold: Dispense Base",bg='NavajoWhite2',font=("Arial Bold",20))
+        button8.place(x=480,y=135)
         button8.bind('<ButtonPress-1>',startBase)
         button8.bind('<ButtonRelease-1>',stopDispense)
         
         # Continuously Reverse Acid pump while button is held
-        button9 = Button(self, text = " Reverse Acid Pump",font=("Arial Bold",20))
-        button9.place(x=500,y=135)
+        button9 = Button(self, text = "Hold: Reverse Acid  ",bg='NavajoWhite2',font=("Arial Bold",20))
+        button9.place(x=80,y=185)
         button9.bind('<ButtonPress-1>',startAcidReverse)
         button9.bind('<ButtonRelease-1>',stopReverse)
         
         # Continuously Reverse Base pump while button is held
-        button10 = Button(self, text = "Reverse Base Pump",font=("Arial Bold",20))
-        button10.place(x=500,y=185)
+        button10 = Button(self, text = "Hold: Reverse Base  ",bg='NavajoWhite2',font=("Arial Bold",20))
+        button10.place(x=480,y=185)
         button10.bind('<ButtonPress-1>',startBaseReverse)
         button10.bind('<ButtonRelease-1>',stopReverse)
     
