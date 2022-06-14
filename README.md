@@ -30,12 +30,6 @@ Touchscreen Display will display the current pH readings as well as the user-det
 - Mouse
 - 3D Printer + filament
 
-### Spring 2021
-Gathered Food Safe Tote box, 10G pump, tubing, PVC pipe with end caps, net cups.
-Drilled 4 2" holes into PVC pipe using power drill and 2" hole saw drill bit.
-Put end caps on PVC pipe. Drilled holes in end caps for 5/8" tubing for water flow.
-
-Installed Raspbian onto SD card for the Raspberrypi
 <img width="683" alt="Box Build Front" src="https://user-images.githubusercontent.com/77286593/156473533-a99588cf-aaf2-42f1-95fe-b82c02ccc706.png">
 <img width="683" alt="Box Build Back" src="https://user-images.githubusercontent.com/77286593/156473546-12daef44-20e3-4f21-8b68-f64c6eac0af4.png">
 
